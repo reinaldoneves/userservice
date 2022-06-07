@@ -53,5 +53,4 @@ public class UserServiceImpl implements UserService {
         return userRepo.findAll();
     }
 
-    //TODO: Continuar daqui https://youtu.be/VVn9OG9nfH0?t=1543
 }

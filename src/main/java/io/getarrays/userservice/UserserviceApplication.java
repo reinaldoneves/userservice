@@ -10,4 +10,6 @@ public class UserserviceApplication {
 		SpringApplication.run(UserserviceApplication.class, args);
 	}
 
+	//TODO: Continua daqui parça: https://youtu.be/VVn9OG9nfH0?t=2052
+
 }
