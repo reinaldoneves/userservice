@@ -48,6 +48,7 @@ public class UserserviceApplication {
 		};
 	}
 
-	//TODO: Continua daqui parça: https://youtu.be/VVn9OG9nfH0?t=5600
+	//TODO: Continua daqui parça: https://youtu.be/VVn9OG9nfH0?t=6569
+	//TODO: Verificar por que não tá devolvendo as coisas certas até o ponto do vídeo
 
 }
