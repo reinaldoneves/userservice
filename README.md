@@ -18,8 +18,7 @@ https://www.youtube.com/channel/UC3qeVkfxM7xeFt_AtZwmYhw
 
 Assalamu'alaikum Nelson
 
-
-`:warning:`
+<h3>warning!</h3>
 [TODO]
     Do refactor on the code to make it more readable.
     Find another class for the depracated WebSecurityConfigurerAdapter.java
