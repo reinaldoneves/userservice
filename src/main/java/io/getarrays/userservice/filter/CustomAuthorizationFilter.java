@@ -29,13 +29,12 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @Slf4j
 public class CustomAuthorizationFilter extends OncePerRequestFilter {
 
-
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
-        if (request.getServletPath().equals("/api/login")) {
+        if(request.getServletPath().equals("/api/login")) {
             filterChain.doFilter(request, response);
-        } else {
+        }else {
             String authorizationHeader = request.getHeader(AUTHORIZATION);
             if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
                 try {
@@ -46,8 +45,8 @@ public class CustomAuthorizationFilter extends OncePerRequestFilter {
                     String username = decodedJWT.getSubject();
                     String[] roles = decodedJWT.getClaim("roles").asArray(String.class);
                     Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
-                    stream(roles).forEach(
-                            role -> authorities.add(new SimpleGrantedAuthority(role)));
+                    stream(roles).forEach(role ->
+                            authorities.add(new SimpleGrantedAuthority(role)));
                     UsernamePasswordAuthenticationToken authenticationToken =
                             new UsernamePasswordAuthenticationToken(username, null, authorities);
                     SecurityContextHolder.getContext().setAuthentication(authenticationToken);
@@ -66,8 +65,6 @@ public class CustomAuthorizationFilter extends OncePerRequestFilter {
             } else {
                 filterChain.doFilter(request, response);
             }
-
-
         }
     }
 }
