@@ -20,7 +20,6 @@ Assalamu'alaikum Nelson
 
 <h3>warning!</h3>
 [TODO]
-    Do refactor on the code to make it more readable.
-    Find another class for the depracated WebSecurityConfigurerAdapter.java
-    Write UnitTests
-    Treat the exceptions more ellegantly
+    Do refactor on the code to make it more readable. 
+    Find another class for the deprecated WebSecurityConfigurerAdapter.java 
+    Write Unit Tests Treat the exceptions more elegantly
