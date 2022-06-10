@@ -18,15 +18,17 @@ import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.POST;
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
-/**
- * {@code @Warning} Super {@link WebSecurityConfigurerAdapter} for all security configurations is depracated.
- * TODO: Verifiy other security configurations to extends.
- */
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
-//@Deprecated
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+@Deprecated
+/**
+ * {@code @Warning} Super {@link WebSecurityConfigurerAdapter}
+ * for all security configurations is depracated.
+ * Use a org.springframework.security.web.SecurityFilterChain Bean
+ * to configure HttpSecurity or a WebSecurityCustomizer Bean to configure WebSecurity
+*/
+ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final UserDetailsService userDetailsService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
