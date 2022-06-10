@@ -6,6 +6,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.getarrays.userservice.domain.Role;
+import io.getarrays.userservice.domain.RoleToUserForm;
 import io.getarrays.userservice.domain.User;
 import io.getarrays.userservice.service.UserService;
 import lombok.Data;
@@ -107,10 +108,4 @@ public class UserResource {
             throw new RuntimeException("Refresh token is missing");
         }
     }
-}
-
-@Data
-class RoleToUserForm{
-    private String username;
-    private String roleName;
 }
