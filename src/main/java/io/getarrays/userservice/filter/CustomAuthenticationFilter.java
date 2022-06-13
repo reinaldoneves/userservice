@@ -48,7 +48,7 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authentication) throws IOException, ServletException {
         User user = (User) authentication.getPrincipal();
-        // WARNING: Don't do this in a production environment. Encrypt secret instead.
+        //TODO: -WARNING: Don't do this in a production environment. Encrypt secret instead.
         Algorithm algorithm = Algorithm.HMAC256("secret".getBytes());
 
         String access_token = JWT.create()
@@ -65,9 +65,6 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
                 .withExpiresAt(new Date(System.currentTimeMillis() + 10 * 60 *1000))
                 .withIssuer(request.getRequestURL().toString())
                 .sign(algorithm);
-
-//        response.setHeader("access_token", access_token);
-//        response.setHeader("refresh_token", refresh_token);
 
         Map<String,String> tokens = new HashMap<>();
         tokens.put("access_token", access_token);
