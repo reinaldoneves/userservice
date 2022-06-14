@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -21,12 +22,14 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
-@Deprecated
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 /**
  * {@code @Warning} Super {@link WebSecurityConfigurerAdapter}
  * for all security configurations is depracated.
  * Use a org.springframework.security.web.SecurityFilterChain Bean
  * to configure HttpSecurity or a WebSecurityCustomizer Bean to configure WebSecurity
+ *
+ * This is the class to configure security, permissions and roles for the users of the application.
 */
  public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
