@@ -46,7 +46,10 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
     }
 
     @Override
-    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authentication) throws IOException, ServletException {
+    protected void successfulAuthentication(HttpServletRequest request,
+                                            HttpServletResponse response,
+                                            FilterChain chain,
+                                            Authentication authentication) throws IOException, ServletException {
         User user = (User) authentication.getPrincipal();
         //TODO: -WARNING: Don't do this in a production environment. Encrypt secret instead.
         Algorithm algorithm = Algorithm.HMAC256("secret".getBytes());
