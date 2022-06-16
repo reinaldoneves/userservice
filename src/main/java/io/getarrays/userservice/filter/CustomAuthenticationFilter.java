@@ -3,6 +3,7 @@ package io.getarrays.userservice.filter;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.getarrays.userservice.token.JwtToken;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -29,8 +30,11 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
 
     private final AuthenticationManager authenticationManager;
 
+    private final JwtToken jwtToken;
+
     public CustomAuthenticationFilter(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
+        jwtToken = new JwtToken();
     }
 
     @Override
@@ -53,9 +57,8 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
         User user = (User) authentication.getPrincipal();
         //TODO: -WARNING: Don't do this in a production environment. Encrypt secret instead.
         Algorithm algorithm = Algorithm.HMAC256("secret".getBytes());
-        String access_token = getAccessToken(request, user, algorithm);
-
-        String refresh_token = getRefreshToken(request, user, algorithm);
+        String access_token = jwtToken.getAccessToken(request, user, algorithm);
+        String refresh_token = jwtToken.getRefreshToken(request, user, algorithm);
 
         Map<String,String> tokens = new HashMap<>();
         tokens.put("access_token", access_token);
@@ -65,23 +68,23 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
 
     }
 
-    private String getRefreshToken(HttpServletRequest request, User user, Algorithm algorithm) {
-        return JWT.create()
-                .withSubject(user.getUsername())
-                .withExpiresAt(new Date(System.currentTimeMillis() + 10 * 60 * 1000))
-                .withIssuer(request.getRequestURL().toString())
-                .sign(algorithm);
-    }
-
-    private String getAccessToken(HttpServletRequest request, User user, Algorithm algorithm) {
-        return JWT.create()
-                .withSubject(user.getUsername())
-                .withExpiresAt(new Date(System.currentTimeMillis() + 10 * 60 *1000))
-                .withIssuer(request.getRequestURL().toString())
-                .withClaim("roles", user.getAuthorities().stream()
-                        .map(GrantedAuthority::getAuthority)
-                        .collect(Collectors.toList()))
-                .sign(algorithm);
-    }
+//    private String getRefreshToken(HttpServletRequest request, User user, Algorithm algorithm) {
+//        return JWT.create()
+//                .withSubject(user.getUsername())
+//                .withExpiresAt(new Date(System.currentTimeMillis() + 10 * 60 * 1000))
+//                .withIssuer(request.getRequestURL().toString())
+//                .sign(algorithm);
+//    }
+//
+//    private String getAccessToken(HttpServletRequest request, User user, Algorithm algorithm) {
+//        return JWT.create()
+//                .withSubject(user.getUsername())
+//                .withExpiresAt(new Date(System.currentTimeMillis() + 10 * 60 *1000))
+//                .withIssuer(request.getRequestURL().toString())
+//                .withClaim("roles", user.getAuthorities().stream()
+//                        .map(GrantedAuthority::getAuthority)
+//                        .collect(Collectors.toList()))
+//                .sign(algorithm);
+//    }
 }
 
