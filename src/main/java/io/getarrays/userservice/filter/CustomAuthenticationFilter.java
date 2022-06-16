@@ -53,21 +53,9 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
         User user = (User) authentication.getPrincipal();
         //TODO: -WARNING: Don't do this in a production environment. Encrypt secret instead.
         Algorithm algorithm = Algorithm.HMAC256("secret".getBytes());
+        String access_token = getAccessToken(request, user, algorithm);
 
-        String access_token = JWT.create()
-                .withSubject(user.getUsername())
-                .withExpiresAt(new Date(System.currentTimeMillis() + 10 * 60 *1000))
-                .withIssuer(request.getRequestURL().toString())
-                .withClaim("roles", user.getAuthorities().stream()
-                        .map(GrantedAuthority::getAuthority)
-                        .collect(Collectors.toList()))
-                .sign(algorithm);
-
-        String refresh_token = JWT.create()
-                .withSubject(user.getUsername())
-                .withExpiresAt(new Date(System.currentTimeMillis() + 10 * 60 *1000))
-                .withIssuer(request.getRequestURL().toString())
-                .sign(algorithm);
+        String refresh_token = getRefreshToken(request, user, algorithm);
 
         Map<String,String> tokens = new HashMap<>();
         tokens.put("access_token", access_token);
@@ -75,6 +63,25 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
         response.setContentType(APPLICATION_JSON_VALUE);
         new ObjectMapper().writeValue(response.getOutputStream(), tokens);
 
+    }
+
+    private String getRefreshToken(HttpServletRequest request, User user, Algorithm algorithm) {
+        return JWT.create()
+                .withSubject(user.getUsername())
+                .withExpiresAt(new Date(System.currentTimeMillis() + 10 * 60 * 1000))
+                .withIssuer(request.getRequestURL().toString())
+                .sign(algorithm);
+    }
+
+    private String getAccessToken(HttpServletRequest request, User user, Algorithm algorithm) {
+        return JWT.create()
+                .withSubject(user.getUsername())
+                .withExpiresAt(new Date(System.currentTimeMillis() + 10 * 60 *1000))
+                .withIssuer(request.getRequestURL().toString())
+                .withClaim("roles", user.getAuthorities().stream()
+                        .map(GrantedAuthority::getAuthority)
+                        .collect(Collectors.toList()))
+                .sign(algorithm);
     }
 }
 
