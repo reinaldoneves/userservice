@@ -12,6 +12,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.ArrayList;
 
+/***
+ * Provideds a UserService to secure login with SpringBoot, SpringSecurity and JWT.
+ * provided by GetArrays and AmigosCode
+ * Reference https://youtu.be/VVn9OG9nfH0?t=6569
+ * @author reinaldo_neves@hotmail.com
+ */
 @SpringBootApplication
 public class UserserviceApplication {
 
@@ -47,8 +53,5 @@ public class UserserviceApplication {
 
 		};
 	}
-
-	//TODO: Continua daqui parça: https://youtu.be/VVn9OG9nfH0?t=6569
-	//TODO: Verificar por que não tá devolvendo as coisas certas até o ponto do vídeo
 
 }
