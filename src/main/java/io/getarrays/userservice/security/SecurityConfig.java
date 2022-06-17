@@ -70,6 +70,7 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
         http.authorizeRequests().anyRequest().authenticated();
         http.addFilter(customAuthenticationFilter);
         http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
+        http.formLogin();
     }
 
     @Bean
