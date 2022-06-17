@@ -1,7 +1,7 @@
 # User Service API
 
 <p><h4>A User service with Spring Boot + Spring Security and JWT
-that provides a user api for a system to authenticate a user.
+that provides a user api for a system to authenticate a user
 using json web token.</h4></p>
 
 <h3 align="left">Languages and Tools:</h3>

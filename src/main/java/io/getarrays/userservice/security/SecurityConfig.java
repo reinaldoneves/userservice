@@ -45,6 +45,8 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 
         customAuthenticationFilter.setFilterProcessesUrl("/api/login");
 
+//      Enable csrf (Cross site request forgery) when using web browser applications:
+//      http.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(STATELESS);
         http.authorizeRequests().antMatchers("/api/login/**", "/api/token/refresh/").permitAll();

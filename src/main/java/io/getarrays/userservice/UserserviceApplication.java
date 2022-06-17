@@ -34,8 +34,8 @@ public class UserserviceApplication {
 			userService.saveRole(new Role(null, "ROLE_SUPER_ADMIN"));
 
 			userService.saveUser(new User(null, "Pixinguinha","pixinguinha", "123456", new ArrayList<>()));
-			userService.saveUser(new User(null, "Moacir Santos","moacir_santos", "123456", new ArrayList<>()));			userService.saveUser(new User(null, "User full name","username", "password", new ArrayList<>()));
-			userService.saveUser(new User(null, "Garoto","garoto", "123456", new ArrayList<>()));			userService.saveUser(new User(null, "User full name","username", "password", new ArrayList<>()));
+			userService.saveUser(new User(null, "Moacir Santos","moacir_santos", "123456", new ArrayList<>()));
+			userService.saveUser(new User(null, "Garoto","garoto", "123456", new ArrayList<>()));
 			userService.saveUser(new User(null, "Baden Powell","baden_powell", "123456", new ArrayList<>()));
 
 			userService.addRoleToUser("pixinguinha", "ROLE_SUPER_ADMIN");
@@ -47,8 +47,5 @@ public class UserserviceApplication {
 
 		};
 	}
-
-	//TODO: Continua daqui parça: https://youtu.be/VVn9OG9nfH0?t=6569
-	//TODO: Verificar por que não tá devolvendo as coisas certas até o ponto do vídeo
 
 }
