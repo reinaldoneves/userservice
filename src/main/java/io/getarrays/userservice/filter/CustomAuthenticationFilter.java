@@ -28,13 +28,6 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
 
     private final JwtToken jwtToken;
 
-//    public CustomAuthenticationFilter(AuthenticationManager authenticationManager,
-//                                      JwtToken jwtToken) {
-//        this.authenticationManager = authenticationManager;
-//        this.jwtToken = jwtToken);
-//    }
-
-
     public CustomAuthenticationFilter(AuthenticationManager authenticationManager, JwtToken jwtToken) {
         this.authenticationManager = authenticationManager;
         this.jwtToken = jwtToken;
